@@ -5,7 +5,7 @@ alwaysApply: true
 
 # Appeal data updates
 
-- Edit the root `data.json` for collected or target amounts, medical story, account details, payment status, contacts, and timeline events. Do not hardcode replacement values in JSX or the poster generator.
+- Edit the root `data.json` for collected or target amounts, medical story, volunteer instructions, account details, payment status, contacts, and timeline events. Do not hardcode replacement values in JSX or the poster generator.
 - Keep `funding.collected` and `funding.target` as whole rupee numbers. The site calculates remaining amount and progress from them. For example, `428022` displays as `₹4,28,022`.
 - For a payment status change, update `payments.upiStatus`, `payments.upiStatusReason`, and `payments.upiStatusAt`, then add a dated event to `timeline`. Review the bank transfer and UPI wording before publishing.
 - Run `npm run poster` after editing `data.json` to regenerate the SVG, PNG, and WhatsApp text. Run `npm run build` to check the site.

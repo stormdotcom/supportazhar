@@ -20,7 +20,7 @@ const escape = (value) => String(value).replace(/[&<>"']/g, (char) => ({
 }[char]));
 
 const cards = accounts.map((item, index) => {
-  const y = 585 + index * 185;
+  const y = 610 + index * 185;
   return `<g>
     <rect x="70" y="${y}" width="940" height="165" rx="18" fill="#ffffff" stroke="#c9dedb" stroke-width="2"/>
     <rect x="92" y="${y + 22}" width="54" height="54" rx="14" fill="#dcefeb"/>
@@ -35,12 +35,12 @@ const cards = accounts.map((item, index) => {
 
 const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1350" viewBox="0 0 1080 1350" role="img" aria-labelledby="title description">
   <title id="title">Volunteer for Azhar Shafi</title>
-  <desc id="description">Collect cash contributions and transfer by NEFT to one of three listed bank accounts. UPI and GPay are ${escape(appeal.payments.upiStatus)} as of ${escape(statusStamp)}.</desc>
+  <desc id="description">Volunteers collect cash, deposit it into their own bank account, then transfer the total by NEFT to one of three listed accounts. UPI and GPay are ${escape(appeal.payments.upiStatus)} as of ${escape(statusStamp)}.</desc>
   <style>
     text { font-family: Arial, 'Nirmala UI', sans-serif; }
     .eyebrow { font-size: 25px; font-weight: 700; fill: #296c71; letter-spacing: 1.8px; }
     .headline { font-size: 74px; font-weight: 800; fill: #103d45; letter-spacing: -2px; }
-    .body { font-size: 29px; fill: #355a60; }
+    .body { font-size: 28px; fill: #355a60; }
     .status { font-size: 29px; font-weight: 800; fill: #80501d; }
     .status-note { font-size: 24px; fill: #755c3d; }
     .section { font-size: 40px; font-weight: 800; fill: #103d45; }
@@ -56,12 +56,11 @@ const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1350" 
   <text x="70" y="85" class="eyebrow">SUPPORT FOR AZHAR SHAFI</text>
   <text x="70" y="184" class="headline">Take a step</text>
   <text x="70" y="263" class="headline">for Azhar.</text>
-  <text x="72" y="321" class="body">Volunteer to collect cash contributions.</text>
-  <text x="72" y="362" class="body">Transfer the collected amount by NEFT.</text>
-  <rect x="70" y="399" width="940" height="100" rx="16" fill="#fff0d9"/>
-  <text x="97" y="442" class="status">UPI / GPay ${escape(appeal.payments.upiStatus)}</text>
-  <text x="97" y="477" class="status-note">${escape(appeal.payments.upiStatusReason)} · ${escape(statusStamp)}</text>
-  <text x="70" y="548" class="section">Choose any one bank account</text>
+  ${appeal.volunteer.posterLines.map((line, index) => `<text x="72" y="${315 + index * 39}" class="body">${escape(line)}</text>`).join('')}
+  <rect x="70" y="430" width="940" height="100" rx="16" fill="#fff0d9"/>
+  <text x="97" y="473" class="status">UPI / GPay ${escape(appeal.payments.upiStatus)}</text>
+  <text x="97" y="508" class="status-note">${escape(appeal.payments.upiStatusReason)} · ${escape(statusStamp)}</text>
+  <text x="70" y="578" class="section">Choose any one bank account</text>
   ${cards}
   <text x="70" y="1195" class="footer">${escape(rupees(appeal.funding.collected))} collected toward ${escape(rupees(appeal.funding.target))} goal.</text>
   <text x="70" y="1231" class="footer">Questions? Call ${escape(appeal.contacts.reference[0].display)}</text>
@@ -72,5 +71,5 @@ const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1350" 
 writeFileSync(join(output, 'azhar-volunteer-poster.svg'), svg, 'utf8');
 await sharp(Buffer.from(svg)).png().toFile(join(output, 'azhar-volunteer-poster.png'));
 
-const message = `Please take a step for ${appeal.person.name}. We still have a long way to go to meet the ${rupees(appeal.funding.target)} treatment goal. ${rupees(appeal.funding.collected)} has been collected so far.\n\nIf you can volunteer to collect cash contributions, please transfer the collected amount by NEFT to any ONE of these bank accounts:\n\n${accounts.map((account, index) => `${index + 1}. ${account.holder} — ${account.number} — IFSC ${account.ifsc}`).join('\n')}\n\nUPI and GPay are currently ${appeal.payments.upiStatus} because their limits were reached on ${statusStamp}. Please check the recipient name before sending a bank transfer.\n\nQuestions about the appeal: ${appeal.contacts.reference[0].display}\n`;
+const message = `Please support ${appeal.person.name}. ${rupees(appeal.funding.collected)} has been collected toward the ${rupees(appeal.funding.target)} treatment goal. We still have a long way to go.\n\n${appeal.volunteer.whatsappText}\n\nNEFT recipient accounts (choose any ONE):\n${accounts.map((account, index) => `${index + 1}. ${account.holder} — ${account.number} — IFSC ${account.ifsc}`).join('\n')}\n\nUPI and GPay are currently ${appeal.payments.upiStatus} because their limits were reached on ${statusStamp}. Please check the recipient name before sending a bank transfer.\n\nQuestions about the appeal: ${appeal.contacts.reference[0].display}\n`;
 writeFileSync(join(output, 'azhar-volunteer-whatsapp.txt'), message, 'utf8');

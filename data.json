@@ -24,6 +24,21 @@
     "upiStatusAt": "2026-10-24T12:00:00+05:30",
     "bankTransferMethod": "NEFT"
   },
+  "volunteer": {
+    "heading": "Take a step for Azhar",
+    "intro": "As an interim option while UPI and GPay are unavailable, you can volunteer to collect cash contributions locally.",
+    "steps": [
+      "Collect cash contributions.",
+      "Deposit the collected cash into your own bank account.",
+      "Transfer the combined amount from your account by NEFT to any one of the three accounts below."
+    ],
+    "whatsappText": "During this interim period, volunteers can collect cash contributions, deposit the cash into their own bank account, then transfer the combined amount by NEFT from that account to any one of the accounts below.",
+    "posterLines": [
+      "Collect cash contributions locally for now.",
+      "Deposit the cash into your own bank account.",
+      "Transfer the total by NEFT to any account below."
+    ]
+  },
   "accounts": [
     {
       "id": "current",

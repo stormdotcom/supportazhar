@@ -47,8 +47,11 @@ export default function HomePage() {
 
       <section className="volunteer-section" aria-labelledby="volunteer-title">
         <div>
-          <h2 id="volunteer-title">Take a step for Azhar</h2>
-          <p>If you can volunteer to collect cash contributions, please pass the collected amount on by NEFT to any one of the three bank accounts below. Every effort brings the family closer to the goal.</p>
+          <h2 id="volunteer-title">{appeal.volunteer.heading}</h2>
+          <p>{appeal.volunteer.intro}</p>
+          <ol className="volunteer-steps">
+            {appeal.volunteer.steps.map((step) => <li key={step}>{step}</li>)}
+          </ol>
         </div>
         <Link className="volunteer-link" to="/#contribute">See bank accounts <span aria-hidden="true">↓</span></Link>
       </section>
@@ -99,7 +102,7 @@ export default function HomePage() {
       </section>
 
       <section className="contacts-section" aria-labelledby="contacts-title">
-        <div><h2 id="contacts-title">Reference contacts</h2><p>For questions about the appeal or handing over collected cash, contact the people listed in the supplied reference.</p></div>
+        <div><h2 id="contacts-title">Reference contacts</h2><p>For questions about volunteering or the appeal, contact the people listed in the supplied reference.</p></div>
         <div className="contact-links">
           {appeal.contacts.reference.map((contact) => <a key={contact.tel} href={`tel:${contact.tel}`}>{contact.display}</a>)}
         </div>

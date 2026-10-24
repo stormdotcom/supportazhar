@@ -61,6 +61,8 @@ h1 { max-width: 720px; margin-bottom: 27px; font-size: clamp(47px, 5.8vw, 84px);
 .volunteer-section > div { max-width: 750px; }
 .volunteer-section h2 { margin: 0 0 10px; font-size: clamp(26px, 3vw, 38px); letter-spacing: -.052em; }
 .volunteer-section p { margin: 0; color: #315a60; line-height: 1.65; font-size: 16px; }
+.volunteer-steps { margin: 13px 0 0; padding-left: 23px; color: #315a60; line-height: 1.65; font-size: 15px; }
+.volunteer-steps li { padding-left: 3px; }
 .volunteer-link { flex: 0 0 auto; min-height: 44px; display: inline-flex; align-items: center; gap: 16px; color: #0b626a; font-size: 14px; font-weight: 700; text-underline-offset: 4px; }
 
 .contribution-section { margin: 0 clamp(15px, 5.3vw, 84px); padding: clamp(29px, 4vw, 52px); border-radius: 16px; background: #fff; box-shadow: 0 23px 65px rgba(14, 76, 80, .07); scroll-margin-top: 20px; }
