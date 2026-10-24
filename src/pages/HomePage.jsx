@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router';
 import AccountDetails from '../components/AccountDetails.jsx';
 import FundingProgress from '../components/FundingProgress.jsx';
+import QrCode from '../components/QrCode.jsx';
 import { accounts } from '../data/accounts.js';
 import { appeal, rupees, shortStatusDate } from '../data/appeal.js';
 
@@ -34,7 +35,14 @@ export default function HomePage() {
           <h1 id="hero-title">Help Azhar reach his treatment goal.</h1>
           <p className="hero-lede">Your contribution can help Azhar and his family meet urgent treatment costs.</p>
           <p className="collection-update"><strong>{rupees(collected)} collected</strong> toward the {rupees(target)} target. We still have a long way to go.</p>
-          <Link className="primary-cta" to="/#contribute">Contribute by bank transfer <span aria-hidden="true">↓</span></Link>
+          {upiInactive && <div className="upi-context-card">
+            <strong>UPI limit reached</strong>
+            <p>UPI and Google Pay have reached their limits. The <Link to="/#google-pay-qr">Google Pay QR remains visible</Link>, but payments may fail. You can contribute by NEFT or help collect contributions locally. <Link to="/incident">Read more about the account update <span aria-hidden="true">→</span></Link></p>
+          </div>}
+          <div className="hero-actions">
+            <Link className="primary-cta" to="/#contribute">Contribute by bank transfer <span aria-hidden="true">↓</span></Link>
+            <Link className="secondary-cta" to="/#volunteer">Start volunteering <span aria-hidden="true">↓</span></Link>
+          </div>
         </div>
         <aside className="need-panel" aria-label="Contribution progress">
           <span className="need-panel-rule" aria-hidden="true" />
@@ -45,7 +53,7 @@ export default function HomePage() {
         </aside>
       </section>
 
-      <section className="volunteer-section" aria-labelledby="volunteer-title">
+      <section className="volunteer-section" id="volunteer" aria-labelledby="volunteer-title">
         <div>
           <h2 id="volunteer-title">{appeal.volunteer.heading}</h2>
           <p>{appeal.volunteer.intro}</p>
@@ -69,6 +77,11 @@ export default function HomePage() {
             <span>01 / 03</span>
             <h3>{accounts.current.holder}</h3>
             <p>{accounts.current.branch}</p>
+            <div className="current-qr-block" id="google-pay-qr">
+              <div className="qr-frame qr-frame-current"><QrCode account={accounts.current} /></div>
+              <p>Google Pay QR for {accounts.current.holder}</p>
+              <small>{upiInactive ? 'UPI limit reached. Google Pay payments may fail; please use NEFT for now.' : 'UPI is active. Check the recipient name before paying.'}</small>
+            </div>
           </div>
           <div className="current-payment-block">
             <p className="payment-instruction">Transfer by NEFT using these bank details. Check the recipient name before sending.</p>

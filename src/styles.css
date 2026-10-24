@@ -48,8 +48,11 @@ h1 { max-width: 720px; margin-bottom: 27px; font-size: clamp(47px, 5.8vw, 84px);
 .upi-context-card { max-width: 620px; margin: -9px 0 27px; padding: 15px 17px; border: 1px solid #cfe2df; border-radius: 8px; background: #f8fcfb; color: #31565c; }
 .upi-context-card strong { display: block; margin-bottom: 5px; color: #124c53; font-size: 14px; }
 .upi-context-card p { margin: 0; font-size: 13px; line-height: 1.55; }
+.upi-context-card a { color: #0b626a; font-weight: 700; text-underline-offset: 3px; }
+.hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; }
 .primary-cta { display: inline-flex; gap: 23px; align-items: center; justify-content: space-between; padding: 15px 20px; border-radius: 7px; background: #0b626a; color: #fff; text-decoration: none; font-size: 15px; font-weight: 700; box-shadow: 0 7px 19px rgba(3, 63, 70, .13); }
 .primary-cta:hover { background: #084f56; }
+.secondary-cta { display: inline-flex; min-height: 44px; align-items: center; gap: 8px; color: #0b626a; font-size: 14px; font-weight: 700; text-underline-offset: 4px; }
 .need-panel { align-self: stretch; display: flex; flex-direction: column; justify-content: center; min-height: 360px; padding: 36px 37px; background: #dcefeb; border-radius: 5px 58px 5px 5px; }
 .need-panel-rule { width: 38px; height: 3px; background: #19868d; margin-bottom: 28px; }
 .need-panel p { margin: 0 0 3px; color: #506f73; font-size: 15px; }
@@ -57,7 +60,7 @@ h1 { max-width: 720px; margin-bottom: 27px; font-size: clamp(47px, 5.8vw, 84px);
 .need-panel-divider { height: 1px; width: 100%; background: #bedbd5; margin: 28px 0; }
 .need-panel small { margin-top: 32px; color: #627d80; font-size: 12px; line-height: 1.4; }
 
-.volunteer-section { margin: 0 clamp(15px, 5.3vw, 84px) 28px; padding: clamp(28px, 4vw, 48px); display: flex; align-items: center; justify-content: space-between; gap: 35px; background: #dcefeb; border-radius: 12px; }
+.volunteer-section { margin: 0 clamp(15px, 5.3vw, 84px) 28px; padding: clamp(28px, 4vw, 48px); display: flex; align-items: center; justify-content: space-between; gap: 35px; background: #dcefeb; border-radius: 12px; scroll-margin-top: 20px; }
 .volunteer-section > div { max-width: 750px; }
 .volunteer-section h2 { margin: 0 0 10px; font-size: clamp(26px, 3vw, 38px); letter-spacing: -.052em; }
 .volunteer-section p { margin: 0; color: #315a60; line-height: 1.65; font-size: 16px; }
@@ -77,11 +80,12 @@ h1 { max-width: 720px; margin-bottom: 27px; font-size: clamp(47px, 5.8vw, 84px);
 .bank-account-intro span { color: #25767b; font-size: 13px; font-weight: 800; }
 .bank-account-intro h3 { margin: 14px 0 6px; font-size: clamp(30px, 3vw, 43px); letter-spacing: -.055em; }
 .bank-account-intro p { margin: 0; color: #527076; }
-.current-qr-block { padding: 29px; background: #eaf6f3; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.current-qr-block { margin-top: 22px; padding: 18px; background: #f8fcfb; border: 1px solid #c7dedb; border-radius: 8px; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; scroll-margin-top: 20px; }
 .qr-frame { width: min(100%, 228px); aspect-ratio: 1; padding: 6px; background: #fff; border: 1px solid #dce6e4; border-radius: 5px; }
 .qr-frame-current { width: min(100%, 270px); padding: 8px; border-color: #c7dedb; box-shadow: 0 4px 16px rgba(12, 86, 85, .09); }
 .qr-code { width: 100%; height: 100%; display: block; background: #fff; }
 .current-qr-block p { margin: 15px 0 1px; font-size: 14px; color: #315e63; font-weight: 700; }
+.current-qr-block small { color: #87551c; font-size: 12px; line-height: 1.45; }
 .text-button { padding: 6px 0; border: 0; background: transparent; color: #0b6871; cursor: pointer; font-size: 13px; font-weight: 700; }
 .current-payment-block { padding: clamp(26px, 4vw, 50px); }
 .current-payment-block h3 { margin-bottom: 6px; font-size: clamp(24px, 2.5vw, 34px); letter-spacing: -.05em; }
@@ -208,6 +212,7 @@ h1 { max-width: 720px; margin-bottom: 27px; font-size: clamp(47px, 5.8vw, 84px);
 @media (max-width: 980px) {
   .hero { grid-template-columns: minmax(0, 1fr) 270px; gap: 30px; padding-left: 5.3vw; padding-right: 5.3vw; }
   .need-panel { min-height: 310px; padding: 28px; }
+  .current-account { grid-template-columns: 1fr; }
   .other-account-grid { grid-template-columns: 1fr; }
   .other-account-body { grid-template-columns: 230px 1fr; }
 }
@@ -254,6 +259,9 @@ h1 { max-width: 720px; margin-bottom: 27px; font-size: clamp(47px, 5.8vw, 84px);
   .hero-detail { font-size: 15px; }
   .need-panel { column-gap: 11px; }
   .need-panel strong { font-size: 25px; }
+  .bank-account-intro { padding: 14px; }
+  .current-qr-block { padding: 6px; }
+  .qr-frame-current { padding: 4px; }
   .section-intro h2, .story-section h2, .contacts-section h2 { font-size: 28px; }
   .account-details-current { grid-template-columns: 1fr; gap: 17px; }
   .account-details-current div:first-child { grid-column: auto; }
@@ -296,7 +304,7 @@ h1 { max-width: 720px; margin-bottom: 27px; font-size: clamp(47px, 5.8vw, 84px);
   .dialog-qr { width: min(100%, 350px); }
 }
 
-@media (min-width: 721px) and (max-width: 1024px) {
+@media (min-width: 981px) and (max-width: 1024px) {
   .site-header { padding-left: max(5.3vw, env(safe-area-inset-left)); padding-right: max(5.3vw, env(safe-area-inset-right)); }
   .hero { grid-template-columns: minmax(0, 1fr) minmax(230px, 300px); gap: clamp(24px, 4vw, 44px); padding-left: max(5.3vw, env(safe-area-inset-left)); padding-right: max(5.3vw, env(safe-area-inset-right)); }
   .current-account { grid-template-columns: minmax(220px, .8fr) minmax(0, 1.2fr); }

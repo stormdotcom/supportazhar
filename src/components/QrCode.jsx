@@ -9,7 +9,7 @@ export default function QrCode({ account, className = '' }) {
       className={`qr-code ${className}`}
       viewBox={`${x} ${y} ${width} ${height}`}
       role="img"
-      aria-label={`Original UPI QR code for ${account.holder}`}
+      aria-label={`Google Pay QR code for ${account.holder}`}
       xmlns="http://www.w3.org/2000/svg"
     >
       <image href={account.image} x="0" y="0" width={imageWidth} height={imageHeight} />
