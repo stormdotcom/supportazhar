@@ -14,7 +14,12 @@ function AccountCard({ account }) {
         <span className={`card-status ${upiInactive ? 'limited' : 'active'}`}>UPI {upiInactive ? 'inactive · limit reached' : 'active'}</span>
         <h3>{account.holder}</h3>
       </div>
-      <div className="other-account-body bank-only">
+      <div className="other-account-body">
+        <div className="other-qr">
+          <div className="qr-frame"><QrCode account={account} /></div>
+          <p>Google Pay QR for {account.holder}</p>
+          <small>{upiInactive ? 'UPI limit reached. Payments may fail; please use NEFT for now.' : 'UPI is active. Check the recipient name before paying.'}</small>
+        </div>
         <AccountDetails account={account} showUpi={false} showPhone={false} />
       </div>
     </article>
@@ -37,7 +42,7 @@ export default function HomePage() {
           <p className="collection-update"><strong>{rupees(collected)} collected</strong> toward the {rupees(target)} target. We still have a long way to go.</p>
           {upiInactive && <div className="upi-context-card">
             <strong>UPI limit reached</strong>
-            <p>UPI and Google Pay have reached their limits. The <Link to="/#google-pay-qr">Google Pay QR remains visible</Link>, but payments may fail. You can contribute by NEFT or help collect contributions locally. <Link to="/incident">Read more about the account update <span aria-hidden="true">→</span></Link></p>
+            <p>UPI and Google Pay have reached their limits. <Link to="/#google-pay-qr">All three Google Pay QR codes remain visible</Link>, but payments may fail. You can contribute by NEFT or help collect contributions locally. <Link to="/incident">Read more about the account update <span aria-hidden="true">→</span></Link></p>
           </div>}
           <div className="hero-actions">
             <Link className="primary-cta" to="/#contribute">Contribute by bank transfer <span aria-hidden="true">↓</span></Link>

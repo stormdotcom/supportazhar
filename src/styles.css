@@ -83,7 +83,7 @@ h1 { max-width: 720px; margin-bottom: 27px; font-size: clamp(47px, 5.8vw, 84px);
 .current-qr-block { margin-top: 22px; padding: 18px; background: #f8fcfb; border: 1px solid #c7dedb; border-radius: 8px; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; scroll-margin-top: 20px; }
 .qr-frame { width: min(100%, 228px); aspect-ratio: 1; padding: 6px; background: #fff; border: 1px solid #dce6e4; border-radius: 5px; }
 .qr-frame-current { width: min(100%, 270px); padding: 8px; border-color: #c7dedb; box-shadow: 0 4px 16px rgba(12, 86, 85, .09); }
-.qr-code { width: 100%; height: 100%; display: block; background: #fff; }
+.qr-code { width: 100%; height: 100%; display: block; object-fit: contain; background: #fff; }
 .current-qr-block p { margin: 15px 0 1px; font-size: 14px; color: #315e63; font-weight: 700; }
 .current-qr-block small { color: #87551c; font-size: 12px; line-height: 1.45; }
 .text-button { padding: 6px 0; border: 0; background: transparent; color: #0b6871; cursor: pointer; font-size: 13px; font-weight: 700; }
@@ -172,10 +172,10 @@ h1 { max-width: 720px; margin-bottom: 27px; font-size: clamp(47px, 5.8vw, 84px);
 .card-status { display: inline-block; font-size: 12px; font-weight: 700; }
 .card-status.active { color: #246e61; }
 .card-status.limited { color: #96602f; }
-.other-account-body { display: grid; grid-template-columns: minmax(155px, .7fr) minmax(0, 1fr); gap: 22px; align-items: start; padding: 0 27px 27px; }
-.other-account-body.bank-only { display: block; }
+.other-account-body { display: grid; gap: 22px; padding: 0 27px 27px; }
 .other-qr { display: flex; align-items: center; flex-direction: column; }
-.other-qr .text-button { margin-top: 7px; }
+.other-qr p { margin: 10px 0 2px; color: #315e63; font-size: 13px; font-weight: 700; text-align: center; }
+.other-qr small { color: #87551c; font-size: 12px; line-height: 1.45; text-align: center; }
 .other-account-card .account-details { gap: 13px; padding-top: 3px; }
 .limited-card { background: #fafaf8; border-color: #e3dfd5; }
 .limit-note { margin: -8px 27px 20px; color: #775f45; font-size: 13px; line-height: 1.5; }
@@ -219,7 +219,6 @@ h1 { max-width: 720px; margin-bottom: 27px; font-size: clamp(47px, 5.8vw, 84px);
   .need-panel { min-height: 310px; padding: 28px; }
   .current-account { grid-template-columns: 1fr; }
   .other-account-grid { grid-template-columns: 1fr; }
-  .other-account-body { grid-template-columns: 230px 1fr; }
 }
 
 @media (max-width: 720px) {
@@ -271,7 +270,6 @@ h1 { max-width: 720px; margin-bottom: 27px; font-size: clamp(47px, 5.8vw, 84px);
   .section-intro h2, .story-section h2, .contacts-section h2 { font-size: 28px; }
   .account-details-current { grid-template-columns: 1fr; gap: 17px; }
   .account-details-current div:first-child { grid-column: auto; }
-  .other-account-body { grid-template-columns: 1fr; }
   .funding-visual { gap: 16px; padding: 18px 12px; }
   .funding-chart { flex-basis: 130px; width: 130px; height: 130px; }
   .funding-chart { overflow: visible; }
