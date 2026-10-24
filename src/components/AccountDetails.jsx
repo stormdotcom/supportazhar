@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { accounts } from '../data/accounts.js';
 
 function CopyButton({ value, label }) {
   const [feedback, setFeedback] = useState('');
@@ -22,16 +21,16 @@ function CopyButton({ value, label }) {
   );
 }
 
-export default function AccountDetails({ account, current = false, limited = false }) {
+export default function AccountDetails({ account, current = false, showUpi = true, showPhone = true }) {
   return (
     <dl className={`account-details ${current ? 'account-details-current' : ''}`}>
-      <div><dt>UPI ID</dt><dd className="with-copy"><span>{account.upi}</span>{!limited && <CopyButton value={account.upi} label="UPI ID" />}</dd></div>
+      {showUpi && <div><dt>UPI ID</dt><dd className="with-copy"><span>{account.upi}</span><CopyButton value={account.upi} label="UPI ID" /></dd></div>}
       <div><dt>{account.holderLabel}</dt><dd>{account.holder}</dd></div>
-      <div><dt>{account.numberLabel}</dt><dd className="with-copy"><span>{account.number}</span>{!limited && <CopyButton value={account.number} label="account number" />}</dd></div>
+      <div><dt>{account.numberLabel}</dt><dd className="with-copy"><span>{account.number}</span><CopyButton value={account.number} label="account number" /></dd></div>
       {current && <div><dt>Account Type</dt><dd>{account.accountType}</dd></div>}
-      <div><dt>{account.ifscLabel}</dt><dd className="with-copy"><span>{account.ifsc}</span>{!limited && <CopyButton value={account.ifsc} label="IFSC code" />}</dd></div>
+      <div><dt>{account.ifscLabel}</dt><dd className="with-copy"><span>{account.ifsc}</span><CopyButton value={account.ifsc} label="IFSC code" /></dd></div>
       {current && <div><dt>Branch</dt><dd>{account.branch}</dd></div>}
-      {account.phone && <div><dt>{account.phoneLabel}</dt><dd><a href={`tel:${account.phoneHref}`}>{account.phone}</a></dd></div>}
+      {showPhone && account.phone && <div><dt>{account.phoneLabel}</dt><dd><a href={`tel:${account.phoneHref}`}>{account.phone}</a></dd></div>}
     </dl>
   );
 }

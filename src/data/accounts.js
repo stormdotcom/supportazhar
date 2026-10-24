@@ -1,52 +1,14 @@
+import { appeal } from './appeal.js';
+
 export const appealImage = '/assets/azhar-medical-appeal.png';
 export const additionalAccountsImage = '/assets/azhar-additional-accounts.jpg';
 
-export const accounts = {
-  current: {
-    label: 'New account for contributions',
-    holderLabel: 'Account Name',
-    holder: 'SHAFI S',
-    numberLabel: 'Account Number',
-    number: '50100912757807',
-    ifscLabel: 'IFSC Code',
-    ifsc: 'HDFC0004275',
-    upi: 'shafi.azar122@okhdfcbank',
-    image: appealImage,
-    sourceSize: [1024, 1536],
-    crop: [374, 891, 278, 265],
-    accountType: 'Savings Account',
-    branch: 'HDFC Bank Pattoor',
-  },
-  secondary: {
-    label: 'Secondary account',
-    holderLabel: 'Account holder',
-    holder: 'Muhammed Ashkar N',
+export const accounts = Object.fromEntries(appeal.accounts.map((account) => [
+  account.id,
+  {
+    ...account,
+    holderLabel: account.id === 'current' ? 'Account name' : 'Account holder',
     numberLabel: 'Account number',
-    number: '3439967725',
     ifscLabel: 'IFSC',
-    ifsc: 'SBIN0007253',
-    upi: 'ashkarn534-1@oksbi',
-    image: additionalAccountsImage,
-    sourceSize: [899, 1599],
-    crop: [486, 621, 320, 316],
-    phoneLabel: 'Contact number',
-    phone: '9745527474',
-    phoneHref: '+919745527474',
   },
-  primary: {
-    label: 'Primary account',
-    holderLabel: 'Account holder',
-    holder: 'Naseela Nazar',
-    numberLabel: 'Account number',
-    number: '30990695716',
-    ifscLabel: 'IFSC',
-    ifsc: 'SBIN0010692',
-    upi: 'naseela324@oksbi',
-    image: additionalAccountsImage,
-    sourceSize: [899, 1599],
-    crop: [137, 679, 171, 170],
-    phoneLabel: 'GPay number',
-    phone: '9048313713',
-    phoneHref: '+919048313713',
-  },
-};
+]));

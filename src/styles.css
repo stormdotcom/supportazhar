@@ -43,7 +43,7 @@ h1, h2, h3 { font-family: Manrope, sans-serif; color: #103b43; }
 h1 { max-width: 720px; margin-bottom: 27px; font-size: clamp(47px, 5.8vw, 84px); line-height: 1.07; letter-spacing: -.067em; font-weight: 800; }
 .hero-lede { max-width: 630px; margin-bottom: 15px; font-size: clamp(18px, 1.85vw, 23px); line-height: 1.54; font-weight: 500; color: #21434c; }
 .hero-detail { max-width: 620px; margin-bottom: 30px; color: #536c72; font-size: 16px; line-height: 1.7; }
-.collection-update { max-width: 620px; margin: -11px 0 28px; padding-left: 13px; border-left: 3px solid #2d8588; color: #355e63; font-size: 14px; line-height: 1.5; }
+.collection-update { max-width: 620px; margin: 4px 0 28px; padding-left: 13px; border-left: 3px solid #2d8588; color: #355e63; font-size: 15px; line-height: 1.5; }
 .collection-update strong { color: #104b52; }
 .upi-context-card { max-width: 620px; margin: -9px 0 27px; padding: 15px 17px; border: 1px solid #cfe2df; border-radius: 8px; background: #f8fcfb; color: #31565c; }
 .upi-context-card strong { display: block; margin-bottom: 5px; color: #124c53; font-size: 14px; }
@@ -57,13 +57,24 @@ h1 { max-width: 720px; margin-bottom: 27px; font-size: clamp(47px, 5.8vw, 84px);
 .need-panel-divider { height: 1px; width: 100%; background: #bedbd5; margin: 28px 0; }
 .need-panel small { margin-top: 32px; color: #627d80; font-size: 12px; line-height: 1.4; }
 
+.volunteer-section { margin: 0 clamp(15px, 5.3vw, 84px) 28px; padding: clamp(28px, 4vw, 48px); display: flex; align-items: center; justify-content: space-between; gap: 35px; background: #dcefeb; border-radius: 12px; }
+.volunteer-section > div { max-width: 750px; }
+.volunteer-section h2 { margin: 0 0 10px; font-size: clamp(26px, 3vw, 38px); letter-spacing: -.052em; }
+.volunteer-section p { margin: 0; color: #315a60; line-height: 1.65; font-size: 16px; }
+.volunteer-link { flex: 0 0 auto; min-height: 44px; display: inline-flex; align-items: center; gap: 16px; color: #0b626a; font-size: 14px; font-weight: 700; text-underline-offset: 4px; }
+
 .contribution-section { margin: 0 clamp(15px, 5.3vw, 84px); padding: clamp(29px, 4vw, 52px); border-radius: 16px; background: #fff; box-shadow: 0 23px 65px rgba(14, 76, 80, .07); scroll-margin-top: 20px; }
 .section-intro { display: flex; justify-content: space-between; align-items: flex-start; gap: 22px; margin-bottom: 34px; }
 .section-intro h2, .story-section h2, .contacts-section h2 { margin-bottom: 9px; font-size: clamp(27px, 3vw, 39px); letter-spacing: -.052em; line-height: 1.19; }
 .section-intro p { margin-bottom: 0; color: #627a80; line-height: 1.6; font-size: 15px; }
 .active-pill { display: inline-flex; align-items: center; gap: 8px; flex: 0 0 auto; padding: 9px 12px; border-radius: 30px; background: #e7f4ef; color: #246c5e; font-size: 12px; font-weight: 700; }
 .active-pill span { width: 7px; height: 7px; border-radius: 50%; background: #318d72; }
+.inactive-pill { flex: 0 0 auto; padding: 9px 12px; border-radius: 30px; background: #fff1dc; color: #87551c; font-size: 12px; font-weight: 800; }
 .current-account { display: grid; grid-template-columns: minmax(260px, .8fr) minmax(0, 1.2fr); border: 1px solid #d8e8e7; border-radius: 10px; overflow: hidden; }
+.bank-account-intro { padding: clamp(26px, 4vw, 50px); display: flex; flex-direction: column; justify-content: center; background: #eaf6f3; }
+.bank-account-intro span { color: #25767b; font-size: 13px; font-weight: 800; }
+.bank-account-intro h3 { margin: 14px 0 6px; font-size: clamp(30px, 3vw, 43px); letter-spacing: -.055em; }
+.bank-account-intro p { margin: 0; color: #527076; }
 .current-qr-block { padding: 29px; background: #eaf6f3; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; }
 .qr-frame { width: min(100%, 228px); aspect-ratio: 1; padding: 6px; background: #fff; border: 1px solid #dce6e4; border-radius: 5px; }
 .qr-frame-current { width: min(100%, 270px); padding: 8px; border-color: #c7dedb; box-shadow: 0 4px 16px rgba(12, 86, 85, .09); }
@@ -80,6 +91,7 @@ h1 { max-width: 720px; margin-bottom: 27px; font-size: clamp(47px, 5.8vw, 84px);
 .account-details dd a { text-decoration-color: #8eb8b9; text-underline-offset: 3px; }
 .account-details-current { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 30px; row-gap: 22px; }
 .account-details-current div:first-child { grid-column: 1 / -1; }
+.bank-account .account-details-current div:first-child { grid-column: auto; }
 .account-details-current div:first-child dd { font-size: clamp(17px, 1.6vw, 21px); color: #0a606a; }
 .with-copy { display: flex; align-items: center; gap: 8px; }
 .with-copy span { overflow-wrap: anywhere; }
@@ -140,6 +152,9 @@ h1 { max-width: 720px; margin-bottom: 27px; font-size: clamp(47px, 5.8vw, 84px);
 .incident-story { padding-top: clamp(55px, 8vw, 110px); }
 .incident-story .story-heading { max-width: 100%; }
 .incident-story h1 { margin: 0; font-size: clamp(38px, 4.4vw, 58px); }
+.story-action { display: inline-flex; gap: 15px; align-items: center; min-height: 44px; margin-top: 10px; color: #0b626a; font-weight: 700; text-underline-offset: 4px; }
+.incident-page .incident-section { padding-top: clamp(55px, 8vw, 110px); }
+.incident-page .incident-intro h1 { margin: 0 0 12px; font-size: clamp(38px, 4.4vw, 58px); }
 .route-loading { min-height: 55vh; padding: 15vh clamp(22px, 8vw, 128px); color: #536e73; }
 
 .more-accounts { padding: clamp(65px, 8vw, 114px) clamp(22px, 8vw, 128px); }
@@ -152,6 +167,7 @@ h1 { max-width: 720px; margin-bottom: 27px; font-size: clamp(47px, 5.8vw, 84px);
 .card-status.active { color: #246e61; }
 .card-status.limited { color: #96602f; }
 .other-account-body { display: grid; grid-template-columns: minmax(155px, .7fr) minmax(0, 1fr); gap: 22px; align-items: start; padding: 0 27px 27px; }
+.other-account-body.bank-only { display: block; }
 .other-qr { display: flex; align-items: center; flex-direction: column; }
 .other-qr .text-button { margin-top: 7px; }
 .other-account-card .account-details { gap: 13px; padding-top: 3px; }
@@ -202,14 +218,16 @@ h1 { max-width: 720px; margin-bottom: 27px; font-size: clamp(47px, 5.8vw, 84px);
   .brand-mark { width: 30px; height: 30px; }
   .hero { grid-template-columns: minmax(0, 1fr); gap: 30px; padding: 50px max(22px, env(safe-area-inset-right)) 55px max(22px, env(safe-area-inset-left)); }
   .hero-copy { max-width: 600px; }
+  .volunteer-section { margin-left: max(12px, env(safe-area-inset-left)); margin-right: max(12px, env(safe-area-inset-right)); flex-direction: column; align-items: flex-start; gap: 13px; }
   .hero h1 { max-width: 580px; }
   .need-panel { min-height: 0; border-radius: 8px; padding: 23px; display: grid; grid-template-columns: 1fr 1fr; column-gap: 20px; }
   .need-panel-rule, .need-panel-divider, .need-panel small { display: none; }
   .need-panel p { grid-row: 1; font-size: 12px; }
   .need-panel strong { grid-row: 2; font-size: 29px; }
   .contribution-section { margin-left: max(12px, env(safe-area-inset-left)); margin-right: max(12px, env(safe-area-inset-right)); padding: 26px 18px; }
-  .section-intro { margin-bottom: 23px; }
+  .section-intro { flex-direction: column; margin-bottom: 23px; }
   .active-pill { display: none; }
+  .inactive-pill { align-self: flex-start; }
   .current-account { grid-template-columns: 1fr; }
   .current-qr-block { padding: 24px; }
   .current-payment-block { min-width: 0; padding: 26px clamp(16px, 6vw, 23px); }
@@ -225,6 +243,8 @@ h1 { max-width: 720px; margin-bottom: 27px; font-size: clamp(47px, 5.8vw, 84px);
 }
 
 @media (max-width: 500px) {
+  .site-header { flex-wrap: wrap; justify-content: center; gap: 0; padding-top: 12px; padding-bottom: 6px; }
+  .header-nav { width: 100%; justify-content: center; }
   .header-link { font-size: 13px; }
   .context-line { margin-bottom: 15px; }
   h1 { font-size: clamp(42px, 11.5vw, 58px); }

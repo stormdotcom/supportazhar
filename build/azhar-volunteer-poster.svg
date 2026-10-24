@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1350" viewBox="0 0 1080 1350" role="img" aria-labelledby="title description">
+  <title id="title">Volunteer for Azhar Shafi</title>
+  <desc id="description">Collect cash contributions and transfer by NEFT to one of three listed bank accounts. UPI and GPay are inactive because limits were reached on 24 October at 12 PM.</desc>
+  <style>
+    text { font-family: Arial, 'Nirmala UI', sans-serif; }
+    .eyebrow { font-size: 25px; font-weight: 700; fill: #296c71; letter-spacing: 1.8px; }
+    .headline { font-size: 74px; font-weight: 800; fill: #103d45; letter-spacing: -2px; }
+    .body { font-size: 29px; fill: #355a60; }
+    .status { font-size: 29px; font-weight: 800; fill: #80501d; }
+    .status-note { font-size: 24px; fill: #755c3d; }
+    .section { font-size: 40px; font-weight: 800; fill: #103d45; }
+    .section-note { font-size: 25px; fill: #4f7074; }
+    .number { font-size: 24px; font-weight: 800; fill: #135d65; }
+    .holder { font-size: 37px; font-weight: 800; fill: #153f47; }
+    .data-label { font-size: 19px; font-weight: 700; fill: #668186; letter-spacing: 1px; }
+    .data { font-size: 29px; font-weight: 700; fill: #174c54; }
+    .footer { font-size: 23px; fill: #426469; }
+  </style>
+  <rect width="1080" height="1350" fill="#f1f8f6"/>
+  <rect width="1080" height="15" fill="#0d6670"/>
+  <text x="70" y="85" class="eyebrow">SUPPORT FOR AZHAR SHAFI</text>
+  <text x="70" y="184" class="headline">Take a step</text>
+  <text x="70" y="263" class="headline">for Azhar.</text>
+  <text x="72" y="321" class="body">Volunteer to collect cash contributions.</text>
+  <text x="72" y="362" class="body">Transfer the collected amount by NEFT.</text>
+  <rect x="70" y="399" width="940" height="100" rx="16" fill="#fff0d9"/>
+  <text x="97" y="442" class="status">UPI / GPay inactive</text>
+  <text x="97" y="477" class="status-note">Limits reached · 24 Oct 2026, 12 PM</text>
+  <text x="70" y="548" class="section">Choose any one bank account</text>
+  <g>
+    <rect x="70" y="585" width="940" height="165" rx="18" fill="#ffffff" stroke="#c9dedb" stroke-width="2"/>
+    <rect x="92" y="607" width="54" height="54" rx="14" fill="#dcefeb"/>
+    <text x="119" y="643" text-anchor="middle" class="number">01</text>
+    <text x="170" y="648" class="holder">SHAFI S</text>
+    <text x="170" y="695" class="data-label">ACCOUNT NUMBER</text>
+    <text x="170" y="727" class="data">50100912757807</text>
+    <text x="705" y="695" class="data-label">IFSC</text>
+    <text x="705" y="727" class="data">HDFC0004275</text>
+  </g><g>
+    <rect x="70" y="770" width="940" height="165" rx="18" fill="#ffffff" stroke="#c9dedb" stroke-width="2"/>
+    <rect x="92" y="792" width="54" height="54" rx="14" fill="#dcefeb"/>
+    <text x="119" y="828" text-anchor="middle" class="number">02</text>
+    <text x="170" y="833" class="holder">Muhammed Ashkar N</text>
+    <text x="170" y="880" class="data-label">ACCOUNT NUMBER</text>
+    <text x="170" y="912" class="data">3439967725</text>
+    <text x="705" y="880" class="data-label">IFSC</text>
+    <text x="705" y="912" class="data">SBIN0007253</text>
+  </g><g>
+    <rect x="70" y="955" width="940" height="165" rx="18" fill="#ffffff" stroke="#c9dedb" stroke-width="2"/>
+    <rect x="92" y="977" width="54" height="54" rx="14" fill="#dcefeb"/>
+    <text x="119" y="1013" text-anchor="middle" class="number">03</text>
+    <text x="170" y="1018" class="holder">Naseela Nazar</text>
+    <text x="170" y="1065" class="data-label">ACCOUNT NUMBER</text>
+    <text x="170" y="1097" class="data">30990695716</text>
+    <text x="705" y="1065" class="data-label">IFSC</text>
+    <text x="705" y="1097" class="data">SBIN0010692</text>
+  </g>
+  <text x="70" y="1195" class="footer">Check the recipient name before sending.</text>
+  <text x="70" y="1231" class="footer">Questions? Call +91 70129 57194</text>
+  <line x1="70" x2="1010" y1="1260" y2="1260" stroke="#bcd7d2" stroke-width="2"/>
+  <text x="70" y="1307" class="section-note">We have a long way to go. Every contribution helps.</text>
+</svg>
