@@ -266,8 +266,8 @@ h1 { max-width: 720px; margin-bottom: 27px; font-size: clamp(47px, 5.8vw, 84px);
   .incident-filters button { flex: 1; padding-inline: 7px; }
   .incident-log li { grid-template-columns: 1fr; gap: 8px; padding: 18px 4px; }
   .other-qr .qr-frame { width: min(100%, 242px); }
-  .other-account-card .account-details { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
-  .other-account-card .account-details div:first-child { grid-column: 1 / -1; }
+  .other-account-card .account-details { display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; }
+  .other-account-card .account-details div:first-child { grid-column: auto; }
   .contact-links a { font-size: 17px; }
 }
 

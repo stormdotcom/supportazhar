@@ -20,6 +20,6 @@ Run `npm run build` to create a static site in `dist/`.
 
 The Vite development and preview servers serve the app for direct visits to `/info` and `/incident`. When deploying `dist/` to a static host, configure a fallback so these routes serve `index.html`.
 
-The incident log records reactivation times on 23 October and the new 24 October limit update. The page presents SHAFI S first and displays ₹3 lakh collected against the ₹20 lakh treatment target, with ₹17 lakh remaining.
+The incident log records reactivation times on 23 October and the 24 October limit update. The page presents the HDFC account first and calculates collected and remaining totals from `data.json`.
 
-Run `node scripts/generate-volunteer-poster.mjs` to regenerate the current SVG poster in `build/`. The ready-to-share PNG and WhatsApp text are also in `build/`. Earlier `azhar-support-*` posters in that folder contain older UPI information and should not be shared as current payment instructions.
+Edit the root `data.json` for future amount, payment status, account, contact, medical story, and timeline updates. The site calculates remaining funding from `funding.target` and `funding.collected`. Run `npm run poster` to regenerate the current SVG and PNG posters and WhatsApp text in `build/`, then run `npm run build`. Earlier `azhar-support-*` posters in that folder contain older UPI information and should not be shared as current payment instructions.

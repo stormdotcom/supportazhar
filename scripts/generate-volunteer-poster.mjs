@@ -1,6 +1,7 @@
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join, resolve } from 'node:path';
+import sharp from 'sharp';
 
 const project = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const output = join(project, 'build');
@@ -69,6 +70,7 @@ const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1350" 
 </svg>`;
 
 writeFileSync(join(output, 'azhar-volunteer-poster.svg'), svg, 'utf8');
+await sharp(Buffer.from(svg)).png().toFile(join(output, 'azhar-volunteer-poster.png'));
 
 const message = `Please take a step for ${appeal.person.name}. We still have a long way to go to meet the ${rupees(appeal.funding.target)} treatment goal. ${rupees(appeal.funding.collected)} has been collected so far.\n\nIf you can volunteer to collect cash contributions, please transfer the collected amount by NEFT to any ONE of these bank accounts:\n\n${accounts.map((account, index) => `${index + 1}. ${account.holder} — ${account.number} — IFSC ${account.ifsc}`).join('\n')}\n\nUPI and GPay are currently ${appeal.payments.upiStatus} because their limits were reached on ${statusStamp}. Please check the recipient name before sending a bank transfer.\n\nQuestions about the appeal: ${appeal.contacts.reference[0].display}\n`;
 writeFileSync(join(output, 'azhar-volunteer-whatsapp.txt'), message, 'utf8');
