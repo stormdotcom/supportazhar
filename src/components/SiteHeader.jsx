@@ -1,10 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router';
 import { appeal } from '../data/appeal.js';
 
 export default function SiteHeader() {
   const verification = appeal.contacts.reference[0];
   const name = appeal.contacts.verificationName;
+  const [copyStatus, setCopyStatus] = useState('');
+
+  async function copyWebsiteLink() {
+    try {
+      await navigator.clipboard.writeText(appeal.websiteUrl);
+      setCopyStatus('Website link copied');
+    } catch {
+      setCopyStatus('Could not copy. Select the website link to share it.');
+    }
+  }
+
   return (
     <header className="site-header-wrap">
       <div className="site-header">
@@ -26,6 +37,17 @@ export default function SiteHeader() {
           </div>
         </div>
         <a className="verification-call" href={`tel:${verification.tel}`} aria-label={`Call ${name} at ${verification.display}`}>Call {name} <span>{verification.display}</span></a>
+      </div>
+      <div className="site-actions" aria-label="Share and refresh this appeal">
+        <div className="site-actions-link">
+          <strong>Share the latest appeal</strong>
+          <a href={appeal.websiteUrl} target="_blank" rel="noopener noreferrer">supportazhar.vercel.app</a>
+        </div>
+        <div className="site-actions-controls">
+          <button type="button" onClick={copyWebsiteLink}>Copy website link</button>
+          <button type="button" onClick={() => window.location.reload()}>Refresh updates</button>
+        </div>
+        <span className="site-actions-feedback" role="status" aria-live="polite">{copyStatus}</span>
       </div>
     </header>
   );
