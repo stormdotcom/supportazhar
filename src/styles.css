@@ -185,6 +185,11 @@ h1 { max-width: 720px; margin-bottom: 27px; font-size: clamp(47px, 5.8vw, 84px);
 .contact-links { display: grid; gap: 11px; min-width: 210px; }
 .contact-links a { color: #0d535c; font-size: 18px; font-weight: 700; text-decoration-thickness: 1px; text-underline-offset: 4px; }
 .contact-links a:hover { color: #087885; }
+.volunteer-join-section { margin: 24px clamp(15px, 5.3vw, 84px) 0; padding: clamp(29px, 4vw, 52px); display: flex; align-items: center; justify-content: space-between; gap: 28px; border-radius: 12px; background: #fff; }
+.volunteer-join-section h2 { margin-bottom: 8px; font-size: clamp(26px, 3vw, 38px); letter-spacing: -.052em; }
+.volunteer-join-section p { margin: 0; color: #527076; font-size: 15px; line-height: 1.6; }
+.volunteer-join-link { display: inline-flex; flex: 0 0 auto; align-items: center; justify-content: center; gap: 12px; min-height: 44px; padding: 12px 18px; border-radius: 7px; background: #0b626a; color: #fff; font-size: 14px; font-weight: 700; text-decoration: none; }
+.volunteer-join-link:hover { background: #084f56; }
 .site-footer { padding: 42px clamp(22px, 5.3vw, 84px); display: flex; justify-content: space-between; gap: 20px; color: #608085; font-size: 13px; }
 .site-footer span { font-weight: 700; }
 .site-footer div { display: flex; flex-wrap: wrap; gap: 10px 23px; }
@@ -246,6 +251,7 @@ h1 { max-width: 720px; margin-bottom: 27px; font-size: clamp(47px, 5.8vw, 84px);
   .incident-preview { margin-left: max(22px, env(safe-area-inset-left)); margin-right: max(22px, env(safe-area-inset-right)); padding: 42px 0; align-items: flex-start; flex-direction: column; }
   .more-accounts { padding-top: 72px; padding-bottom: 72px; padding-left: max(22px, env(safe-area-inset-left)); padding-right: max(22px, env(safe-area-inset-right)); }
   .contacts-section { margin-left: max(12px, env(safe-area-inset-left)); margin-right: max(12px, env(safe-area-inset-right)); padding: 28px 23px; display: grid; gap: 23px; }
+  .volunteer-join-section { margin-left: max(12px, env(safe-area-inset-left)); margin-right: max(12px, env(safe-area-inset-right)); padding: 28px 23px; flex-direction: column; align-items: flex-start; }
   .site-footer { flex-direction: column; padding-left: max(22px, env(safe-area-inset-left)); padding-right: max(22px, env(safe-area-inset-right)); padding-bottom: max(42px, env(safe-area-inset-bottom)); }
 }
 

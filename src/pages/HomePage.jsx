@@ -120,6 +120,14 @@ export default function HomePage() {
           {appeal.contacts.reference.map((contact) => <a key={contact.tel} href={`tel:${contact.tel}`}>{contact.display}</a>)}
         </div>
       </section>
+
+      <section className="volunteer-join-section" aria-labelledby="volunteer-join-title">
+        <div>
+          <h2 id="volunteer-join-title">Interested in volunteering?</h2>
+          <p>Join the WhatsApp group to help coordinate support for Azhar.</p>
+        </div>
+        <a className="volunteer-join-link" href={appeal.volunteer.whatsappGroupUrl} target="_blank" rel="noopener noreferrer">Start volunteering <span aria-hidden="true">↗</span></a>
+      </section>
     </main>
   );
 }
