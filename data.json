@@ -20,23 +20,23 @@
     "surgeryPaid": 500000
   },
   "payments": {
-    "upiStatus": "inactive",
-    "upiStatusReason": "Transaction limits reached",
-    "upiStatusAt": "2026-10-24T12:00:00+05:30",
+    "upiStatus": "active",
+    "upiStatusReason": "All three UPI accounts are active",
+    "upiStatusAt": "2026-10-24T19:16:16+05:30",
     "bankTransferMethod": "NEFT"
   },
   "volunteer": {
     "heading": "Take a step for Azhar",
-    "intro": "As an interim option while UPI and GPay are unavailable, you can volunteer to collect cash contributions locally.",
+    "intro": "You can also volunteer to collect cash contributions locally for Azhar.",
     "whatsappGroupUrl": "https://chat.whatsapp.com/D5yIPYsO5X1L5bRiAcJ9jE",
     "steps": [
       "Collect cash contributions.",
       "Deposit the collected cash into your own bank account.",
       "Transfer the combined amount from your account by NEFT to any one of the three accounts below."
     ],
-    "whatsappText": "During this interim period, volunteers can collect cash contributions, deposit the cash into their own bank account, then transfer the combined amount by NEFT from that account to any one of the accounts below.",
+    "whatsappText": "Volunteers can collect cash contributions, deposit the cash into their own bank account, then transfer the combined amount by NEFT from that account to any one of the accounts below.",
     "posterLines": [
-      "Collect cash contributions locally for now.",
+      "Collect cash contributions locally.",
       "Deposit the cash into your own bank account.",
       "Transfer the total by NEFT to any account below."
     ]
@@ -87,6 +87,7 @@
     { "date": "2026-10-23", "dateTime": "2026-10-23T15:00:00+05:30", "time": "3:00 PM", "title": "Third account activated", "detail": "SHAFI S’s account was activated for contributions." },
     { "date": "2026-10-23", "dateTime": "2026-10-23T17:00:00+05:30", "time": "5:00 PM", "title": "Primary account reactivated", "detail": "The primary account became active again." },
     { "date": "2026-10-23", "dateTime": "2026-10-23T22:00:00+05:30", "time": "10:00 PM", "title": "Secondary account reactivated", "detail": "The secondary account became active again. All three accounts were active at that time." },
-    { "date": "2026-10-24", "dateTime": "2026-10-24T12:00:00+05:30", "time": "12:00 PM", "title": "All UPI accounts reached their limits", "detail": "UPI and GPay are currently inactive across all three accounts. Contributions can be sent to any of the listed bank accounts by NEFT." }
+    { "date": "2026-10-24", "dateTime": "2026-10-24T12:00:00+05:30", "time": "12:00 PM", "title": "All UPI accounts reached their limits", "detail": "UPI and GPay were inactive across all three accounts at that time. Contributions could still be sent by NEFT." },
+    { "date": "2026-10-24", "dateTime": "2026-10-24T19:16:16+05:30", "time": "7:16 PM", "title": "All UPI accounts active again", "detail": "UPI and Google Pay are active across all three listed accounts. The exact reactivation time was not provided; this is when the status update was recorded." }
   ]
 }

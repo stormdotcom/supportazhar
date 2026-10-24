@@ -75,7 +75,7 @@ export default function HomePage() {
             <h2 id="contribute-title">Contribute by NEFT</h2>
             <p>{upiInactive ? 'UPI and GPay are currently inactive because the transaction limits have been reached.' : 'UPI and GPay are currently active.'} Use the account number and IFSC below for a bank transfer.</p>
           </div>
-          <span className="inactive-pill">UPI {upiInactive ? 'inactive' : 'active'} · {statusAt}</span>
+          <span className={upiInactive ? 'inactive-pill' : 'active-pill'}>UPI {upiInactive ? 'inactive' : 'active'} · {statusAt}</span>
         </div>
         <div className="current-account bank-account">
           <div className="bank-account-intro">
