@@ -122,7 +122,9 @@ export default function ManagePage() {
       window.sessionStorage.setItem(LAST_ACTIVITY_KEY, String(lastActivity.current));
       await load();
     } catch (problem) {
-      setMessage(problem.message);
+      setMessage(problem.message === 'Invalid login credentials'
+        ? 'Invalid PIN or administrator account not set up.'
+        : problem.message);
     } finally { setBusy(false); setPin(''); }
   }
 
