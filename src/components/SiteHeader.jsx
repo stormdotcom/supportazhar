@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router';
-import { appeal } from '../data/appeal.js';
+import { useAppeal } from '../data/liveAppeal.jsx';
 
 export default function SiteHeader() {
+  const { appeal } = useAppeal();
   const verification = appeal.contacts.reference[0];
   const name = appeal.contacts.verificationName;
   const [copyStatus, setCopyStatus] = useState('');

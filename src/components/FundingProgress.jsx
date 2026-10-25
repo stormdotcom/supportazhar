@@ -1,13 +1,15 @@
 import React from 'react';
-import { appeal, rupees } from '../data/appeal.js';
+import { rupees } from '../data/appeal.js';
+import { useAppeal } from '../data/liveAppeal.jsx';
 
 export default function FundingProgress() {
+  const { appeal } = useAppeal();
   const radius = 62;
   const circumference = 2 * Math.PI * radius;
   const { target, collected } = appeal.funding;
   const remaining = Math.max(0, target - collected);
-  const percent = Math.min(100, Math.round((collected / target) * 100));
-  const collectedLength = circumference * Math.min(1, collected / target);
+  const percent = target > 0 ? Math.min(100, Math.round((collected / target) * 100)) : 0;
+  const collectedLength = circumference * (target > 0 ? Math.min(1, collected / target) : 0);
 
   return (
     <section className="funding-section" aria-labelledby="funding-title">

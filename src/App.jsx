@@ -2,10 +2,18 @@ import React, { lazy, Suspense, useEffect } from 'react';
 import { BrowserRouter, Navigate, Route, Routes, useLocation } from 'react-router';
 import SiteFooter from './components/SiteFooter.jsx';
 import SiteHeader from './components/SiteHeader.jsx';
+import { AppealProvider, useAppeal } from './data/liveAppeal.jsx';
 
 const HomePage = lazy(() => import('./pages/HomePage.jsx'));
 const IncidentPage = lazy(() => import('./pages/IncidentPage.jsx'));
 const InfoPage = lazy(() => import('./pages/InfoPage.jsx'));
+const ManagePage = lazy(() => import('./pages/ManagePage.jsx'));
+
+function LiveDataNotice() {
+  const { source } = useAppeal();
+  if (source === 'live') return null;
+  return <div className="live-data-notice" role="status">{source === 'loading' ? 'Checking live updates. Figures shown below are from the bundled snapshot.' : 'Live updates are unavailable. Figures shown below are from the bundled snapshot and may be outdated.'}</div>;
+}
 
 function ScrollToHash() {
   const { pathname, hash, key } = useLocation();
@@ -58,6 +66,7 @@ function AppRoutes() {
         <Route path="/" element={<HomePage />} />
         <Route path="/info" element={<InfoPage />} />
         <Route path="/incident" element={<IncidentPage />} />
+        <Route path="/manage" element={<ManagePage />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </Suspense>
@@ -70,6 +79,7 @@ function AppShell() {
       <ScrollToHash />
       <div className="site-shell">
         <SiteHeader />
+        <LiveDataNotice />
         <AppRoutes />
         <SiteFooter />
       </div>
@@ -78,5 +88,5 @@ function AppShell() {
 }
 
 export default function App() {
-  return <BrowserRouter><AppShell /></BrowserRouter>;
+  return <AppealProvider><BrowserRouter><AppShell /></BrowserRouter></AppealProvider>;
 }

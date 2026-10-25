@@ -1,7 +1,8 @@
 import React from 'react';
-import { appeal } from '../data/appeal.js';
+import { useAppeal } from '../data/liveAppeal.jsx';
 
 export default function TransactionSupport() {
+  const { appeal } = useAppeal();
   return (
     <p className="transaction-help">
       <strong>For UPI transaction issues, contact <a href={`tel:${appeal.contacts.transactionSupport}`}>{appeal.contacts.transactionSupport}</a>.</strong>

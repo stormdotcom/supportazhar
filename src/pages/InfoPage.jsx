@@ -1,8 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router';
-import { appeal, rupees } from '../data/appeal.js';
+import { rupees } from '../data/appeal.js';
+import { useAppeal } from '../data/liveAppeal.jsx';
 
 export default function InfoPage() {
+  const { appeal } = useAppeal();
   return (
     <main id="top" className="info-page">
       <section className="story-section incident-story" aria-labelledby="story-title">

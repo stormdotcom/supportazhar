@@ -1,25 +1,39 @@
 # Support for Azhar Shafi
 
-A responsive React appeal for Azhar with separate contribution, medical information, and account update routes. UPI and GPay are currently marked inactive, while all three bank accounts remain listed for NEFT transfers.
+A Vite/React appeal with public funding and UPI updates, a reported daily collection card, and a PIN-only `/manage` page. Supabase stores the appeal content and operational data. `data.json` is the initial seed and the visibly marked fallback snapshot if live reads fail.
 
-## Run locally
+## Local site
+
+Copy `.env.example` to `.env` and fill in the project URL, publishable key, and the administrator's Supabase Auth email. The local `.env` is ignored by Git. `VITE_` values are public in the built site; the email is an account identifier, not a secret.
 
 ```bash
 npm install
 npm run dev
+npm run build
 ```
 
-Run `npm run build` to create a static site in `dist/`.
+Vercel must have `VITE_SUPABASE_URL`, `VITE_SUPABASE_PUBLISHABLE_KEY`, and `VITE_SUPABASE_ADMIN_EMAIL` in its build environment. `vercel.json` rewrites deep links to the app for direct visits and refreshes.
 
-## Routes and source layout
+## Database
 
-- `/` contains the contribution appeal, volunteer guidance, funding progress, three NEFT account options, and reference contacts.
-- `/info` contains the accident and treatment details.
-- `/incident` contains the chronological account status log, including the 24 October 2026, 12 PM UPI limit update.
-- `src/pages/` contains the lazy-loaded route pages. Shared UI lives in `src/components/`, and the account details live in `src/data/accounts.js`.
+The two files in `supabase/migrations/` create the tables, grants, RLS policies, UPI event trigger, and initial rows from `data.json`. They were applied to the configured project. For another project, run `supabase db push` with that project's database connection. `scripts/generate-supabase-seed.mjs` regenerates `supabase/seed.sql` from `data.json` for a fresh project; do not rerun the initial seed against a live project or duplicate the historical timeline.
 
-The Vite development and preview servers serve the app for direct visits to `/info` and `/incident`. When deploying `dist/` to a static host, configure a fallback so these routes serve `index.html`.
+`campaign_content.content` is JSONB for the static appeal story, account and contact details, and volunteer copy. Funding figures, per-account UPI status, timeline events, and daily collection reports are typed columns in separate tables. Only the operational tables can be edited through `/manage`. Public roles can read the published data but cannot write it.
 
-The incident log records reactivation times on 23 October and the 24 October limit update. The page presents the HDFC account first and calculates collected and remaining totals from `data.json`.
+## Admin sign-in
 
-Edit the root `data.json` for future amount, payment status, account, contact, medical story, and timeline updates. The site calculates remaining funding from `funding.target` and `funding.collected`. Run `npm run poster` to regenerate the current SVG and PNG posters and WhatsApp text in `build/`, then run `npm run build`. Earlier `azhar-support-*` posters in that folder contain older UPI information and should not be shared as current payment instructions.
+`/manage` shows only a six-digit PIN field and signs in directly with Supabase Auth using the configured email and PIN as the Auth password. No PIN or PIN hash is bundled in the client. Supabase Auth stores its password hash. Create one confirmed Auth user in the Supabase Dashboard with that email and PIN, then set its `raw_app_meta_data.role` to `appeal_admin` using the Auth admin API or this SQL in the Supabase SQL Editor (replace the placeholder email):
+
+```sql
+update auth.users
+set raw_app_meta_data = coalesce(raw_app_meta_data, '{}'::jsonb) || '{"role":"appeal_admin"}'::jsonb
+where email = 'ADMIN_EMAIL_HERE';
+```
+
+Disable public sign-ups. The browser keeps the Auth session in `sessionStorage` and signs out after 30 minutes of inactivity. It also records a boolean interface flag in `localStorage` under an unobvious key, but this flag grants no database access. Admin writes require a valid Supabase Auth session with the server-controlled `app_metadata.role` claim under RLS. A six-digit Auth password is weaker than the original server-side PIN-verifier design; Supabase's IP-based Auth rate limits apply, but the custom global PIN lockout does not apply to this direct sign-in flow.
+
+## Editorial workflow
+
+In `/manage`, save funding figures, each UPI switch and optional reason, a daily amount for a specified IST date, or a manual timeline event. A genuine UPI switch writes its timeline event in the same database transaction. Saving the same state creates no event. Automatic events cannot be edited; manual events can be edited or unpublished. Historical entries from `data.json` retain their original displayed time, including the entry with no exact activation time.
+
+The volunteer poster generator still uses the bundled `data.json` snapshot. Refresh that snapshot from verified live values before distributing a newly generated poster; site updates do not regenerate image files automatically.

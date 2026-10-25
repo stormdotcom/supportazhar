@@ -8,7 +8,7 @@ const qrImages = {
   primary: '/assets/upi-primary.jpeg',
 };
 
-export const accounts = Object.fromEntries(appeal.accounts.map((account) => [
+export const getAccounts = (appealData = appeal) => Object.fromEntries(appealData.accounts.map((account) => [
   account.id,
   {
     ...account,

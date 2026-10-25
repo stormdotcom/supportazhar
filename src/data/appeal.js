@@ -1,4 +1,4 @@
-import appeal from '../../data.json';
+import appeal from '../../data.json' with { type: 'json' };
 
 export { appeal };
 

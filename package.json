@@ -6,10 +6,12 @@
   "scripts": {
     "dev": "vite --host 127.0.0.1",
     "build": "vite build",
+    "test": "node --test",
     "poster": "node scripts/generate-volunteer-poster.mjs",
     "preview": "vite preview --host 127.0.0.1"
   },
   "dependencies": {
+    "@supabase/supabase-js": "2.118.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-router": "^8.5.0"
