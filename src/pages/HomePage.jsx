@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 import AccountDetails from '../components/AccountDetails.jsx';
+import DonorWall from '../components/DonorWall.jsx';
 import FundingProgress from '../components/FundingProgress.jsx';
 import QrCode from '../components/QrCode.jsx';
 import { getAccounts } from '../data/accounts.js';
@@ -129,6 +130,8 @@ export default function HomePage() {
           {appeal.contacts.reference.map((contact) => <a key={contact.tel} href={`tel:${contact.tel}`}>{contact.display}</a>)}
         </div>
       </section>
+
+      <DonorWall />
 
       <section className="volunteer-join-section" aria-labelledby="volunteer-join-title">
         <div>
