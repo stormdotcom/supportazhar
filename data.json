@@ -5,13 +5,6 @@
     "age": 32,
     "hometown": "Kazhakkottam"
   },
-  "site": {
-    "name": "Support for Azhar Shafi",
-    "shortName": "Support Azhar",
-    "description": "Support Azhar Shafi's treatment. Contribute by bank transfer or volunteer to collect contributions.",
-    "appealImage": "/assets/azhar-medical-appeal.png",
-    "additionalAccountsImage": "/assets/azhar-additional-accounts.jpg"
-  },
   "medical": {
     "accidentDate": "2026-10-22",
     "story": [
@@ -51,11 +44,8 @@
       "id": "current",
       "label": "HDFC account",
       "holder": "SHAFI S",
-      "holderLabel": "Account name",
       "number": "50100912757807",
       "ifsc": "HDFC0004275",
-      "upi": "shafi.azar122@okhdfcbank",
-      "qrImage": "upi-hdfc.png",
       "accountType": "Savings Account",
       "branch": "HDFC Bank Pattoor"
     },
@@ -65,8 +55,6 @@
       "holder": "Muhammed Ashkar N",
       "number": "3439967725",
       "ifsc": "SBIN0007253",
-      "upi": "ashkarn534-1@oksbi",
-      "qrImage": "upi-secondary.jpeg",
       "phone": "9745527474",
       "phoneLabel": "Contact number"
     },
@@ -76,8 +64,6 @@
       "holder": "Naseela Nazar",
       "number": "30990695716",
       "ifsc": "SBIN0010692",
-      "upi": "naseela324@oksbi",
-      "qrImage": "upi-primary.jpeg",
       "phone": "9048313713",
       "phoneLabel": "GPay number"
     }
