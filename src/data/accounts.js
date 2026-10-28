@@ -1,8 +1,7 @@
 import { appeal } from './appeal.js';
 
-export const appealImage = '/assets/azhar-medical-appeal.png';
-export const additionalAccountsImage = '/assets/azhar-additional-accounts.jpg';
 const qrImages = {
+  shaina: '/assets/upi-shaina.jpg',
   current: '/assets/upi-hdfc.png',
   secondary: '/assets/upi-secondary.jpeg',
   primary: '/assets/upi-primary.jpeg',
@@ -12,7 +11,7 @@ export const getAccounts = (appealData = appeal) => Object.fromEntries(appealDat
   account.id,
   {
     ...account,
-    holderLabel: account.id === 'current' ? 'Account name' : 'Account holder',
+    holderLabel: 'Account holder',
     numberLabel: 'Account number',
     ifscLabel: 'IFSC',
     qrImage: qrImages[account.id],

@@ -5,7 +5,7 @@ export default function QrCode({ account, className = '' }) {
     <img
       className={`qr-code ${className}`}
       src={account.qrImage}
-      alt={`Google Pay QR code for ${account.holder}`}
+      alt={`UPI payment QR code for ${account.holder}`}
     />
   );
 }

@@ -121,11 +121,11 @@ async function drawCollectionUpdate(canvas, data) {
   // Intro
   ctx.fillStyle = '#536e73';
   ctx.font = '16px Arial, sans-serif';
-  ty = wrapText(ctx, `The following amounts have been received across the three designated support accounts as of ${data.dateLabel || todayIST()}.`, PAD, ty + 8, W - PAD * 2, 24);
+  ty = wrapText(ctx, `The following amounts have been received across the designated support accounts as of ${data.dateLabel || todayIST()}.`, PAD, ty + 8, W - PAD * 2, 24);
   ty += 10;
 
   const accounts = data.accounts || [];
-  const labels = ['PRIMARY ACCOUNT', 'SECONDARY ACCOUNT', 'HDFC ACCOUNT'];
+  const labels = accounts.map((account) => (account.label || 'SUPPORT ACCOUNT').toUpperCase());
   const colors = ['#0b626a', '#17707a', '#1c7a87'];
 
   for (let i = 0; i < accounts.length; i++) {
@@ -164,7 +164,7 @@ async function drawCollectionUpdate(canvas, data) {
     ctx.fillText('Account Number:', LEFT, ty + 94);
     // Number
     ctx.fillStyle = '#103b43'; ctx.font = 'bold 17px Arial, sans-serif';
-    ctx.fillText(acc.number || '', LEFT, ty + 115);
+    ctx.fillText(acc.number || acc.upiId || '', LEFT, ty + 115);
 
     // Right side
     const DIVX = PAD + (W - PAD * 2) * 0.52;
@@ -285,12 +285,10 @@ async function drawMedicalAppeal(canvas, data) {
   ctx.fillText('സംഭാവന നൽകാൻ QR സ്കാൻ ചെയ്യൂ', PAD, ty);
   ty += 32;
   ctx.fillStyle = '#536e73'; ctx.font = '14px Arial, sans-serif';
-  ty = wrapText(ctx, 'താഴെയുള്ള ഏതെങ്കിലും UPI അക്കൗണ്ട് തിരഞ്ഞെടുക്കാം. പണമടക്കും മുമ്പ് ആപ്പിൽ പേരും UPI ID-യും പരിശോധിക്കൂ.', PAD, ty, W - PAD * 2, 22);
+  ty = wrapText(ctx, 'താഴെയുള്ള സജീവ UPI അക്കൗണ്ട് ഉപയോഗിക്കൂ. പണമടക്കും മുമ്പ് ആപ്പിൽ പേരും UPI ID-യും പരിശോധിക്കൂ.', PAD, ty, W - PAD * 2, 22);
   ty += 10;
 
   const accounts = data.accounts || [];
-  const qrPaths = ['/assets/upi-primary.jpeg', '/assets/upi-secondary.jpeg', '/assets/upi-hdfc.png'];
-  const accountLabels = ['01 പ്രാഥമിക അക്കൗണ്ട്', '02 രണ്ടാമത്തെ അക്കൗണ്ട്', '03 HDFC അക്കൗണ്ട്'];
 
   for (let i = 0; i < accounts.length; i++) {
     const acc = accounts[i];
@@ -305,7 +303,7 @@ async function drawMedicalAppeal(canvas, data) {
     const QR_SIZE = 124;
     const qrX = PAD + 12; const qrY = ty + 12;
     try {
-      const qrImg = await loadImage(qrPaths[i]);
+      const qrImg = await loadImage(acc.qrImage);
       ctx.drawImage(qrImg, qrX, qrY, QR_SIZE, QR_SIZE);
     } catch {
       ctx.fillStyle = '#e0eeec'; ctx.fillRect(qrX, qrY, QR_SIZE, QR_SIZE);
@@ -318,7 +316,7 @@ async function drawMedicalAppeal(canvas, data) {
     const INFO_X = qrX + QR_SIZE + 18;
     ctx.fillStyle = '#0b626a'; ctx.font = 'bold 11px Arial, sans-serif';
     ctx.letterSpacing = '0.5px';
-    ctx.fillText(accountLabels[i] || `0${i + 1} അക്കൗണ്ട്`, INFO_X, ty + 26);
+    ctx.fillText(`${String(i + 1).padStart(2, '0')} ${acc.label || 'UPI അക്കൗണ്ട്'}`, INFO_X, ty + 26);
     ctx.letterSpacing = '0px';
 
     ctx.fillStyle = '#88a0a4'; ctx.font = '11px Arial, sans-serif';
@@ -332,7 +330,7 @@ async function drawMedicalAppeal(canvas, data) {
     ctx.fillText(acc.upiId || '—', INFO_X, ty + 108);
 
     ctx.fillStyle = '#103b43'; ctx.font = 'bold 15px Arial, sans-serif';
-    ctx.fillText(acc.number || '', INFO_X, ty + 130);
+    ctx.fillText(acc.number || 'UPI payments only', INFO_X, ty + 130);
     if (acc.ifsc) {
       ctx.fillStyle = '#103b43'; ctx.font = 'bold 14px Arial, sans-serif';
       ctx.fillText(acc.ifsc, INFO_X + 270, ty + 130);
@@ -469,7 +467,7 @@ export default function AnnouncementGenerator({ metrics, accounts, appeal, onFun
   // ── Collection Update ───────────────────────────────────────────────────
   async function handleGenerateCollection() {
     const ok = await askConfirm(
-      'You are about to generate a Contribution Collection Update image. It will show the current fund amounts collected in all three accounts. The image will be downloaded immediately. Do you want to continue?'
+      'You are about to generate a Contribution Collection Update image. It will show the current fund amounts collected in the listed accounts. The image will be downloaded immediately. Do you want to continue?'
     );
     if (!ok) return;
 
@@ -487,7 +485,9 @@ export default function AnnouncementGenerator({ metrics, accounts, appeal, onFun
         ...edited,
         accounts: (accounts || []).map(a => ({
           holder: a.holder,
+          label: a.label,
           number: a.number,
+          upiId: a.upiId,
           collected: a.collected || 0,
         })),
       });
@@ -523,7 +523,9 @@ export default function AnnouncementGenerator({ metrics, accounts, appeal, onFun
         target: Number(metrics?.target_rupees || appeal?.funding?.target || 2000000),
         collected: Number(metrics?.collected_rupees || appeal?.funding?.collected || 0),
         surgeryPaid: Number(metrics?.surgery_paid_rupees || appeal?.funding?.surgeryPaid || 0),
-        accounts: (accounts || []).map(a => ({
+        accounts: (accounts || []).filter(a => a.upiActive).map(a => ({
+          label: a.label,
+          qrImage: a.qrImage,
           holder: a.holder,
           number: a.number,
           upiId: a.upi_id || a.upiId || '',
@@ -609,7 +611,7 @@ export default function AnnouncementGenerator({ metrics, accounts, appeal, onFun
         <div className="ann-type-card">
           <div className="ann-type-icon">🏥</div>
           <h3>Medical Appeal Poster</h3>
-          <p>Malayalam-style poster with QR codes for all three UPI accounts. Best for WhatsApp and social media sharing.</p>
+          <p>Malayalam-style poster with QR codes for active UPI accounts. Best for WhatsApp and social media sharing.</p>
           <ul className="ann-type-list">
             <li>QR images pre-loaded from existing assets</li>
             <li>Date, headline &amp; story are editable before generation</li>

@@ -16,7 +16,7 @@ Vercel must have `VITE_SUPABASE_URL`, `VITE_SUPABASE_PUBLISHABLE_KEY`, and `VITE
 
 ## Database
 
-The two files in `supabase/migrations/` create the tables, grants, RLS policies, UPI event trigger, and initial rows from `data.json`. They were applied to the configured project. For another project, run `supabase db push` with that project's database connection. `scripts/generate-supabase-seed.mjs` regenerates `supabase/seed.sql` from `data.json` for a fresh project; do not rerun the initial seed against a live project or duplicate the historical timeline.
+The initial migrations create the tables, grants, RLS policies, UPI event trigger, and original rows. The 28 October migration adds Shaina N S as the primary UPI account, marks the three older UPI accounts inactive, and records the change in the timeline. These changes were applied to the configured project. For another project, run `supabase db push` with that project's database connection. Do not rerun the initial seed against a live project or duplicate the historical timeline.
 
 `campaign_content.content` is JSONB for the static appeal story, account and contact details, and volunteer copy. Funding figures, per-account UPI status, timeline events, and daily collection reports are typed columns in separate tables. Only the operational tables can be edited through `/manage`. Public roles can read the published data but cannot write it.
 
@@ -35,5 +35,7 @@ Disable public sign-ups. The browser keeps the Auth session in `sessionStorage` 
 ## Editorial workflow
 
 In `/manage`, save funding figures, each UPI switch and optional reason, a daily amount for a specified IST date, or a manual timeline event. A genuine UPI switch writes its timeline event in the same database transaction. Saving the same state creates no event. Automatic events cannot be edited; manual events can be edited or unpublished. Historical entries from `data.json` retain their original displayed time, including the entry with no exact activation time.
+
+The older UPI accounts remain inactive until an administrator confirms availability and switches them back on. The 24-hour note is a time to recheck their limits, not an automatic reactivation. Shaina's supplied QR contains a UPI ID and payee name; no account number or IFSC was provided for her account.
 
 The volunteer poster generator still uses the bundled `data.json` snapshot. Refresh that snapshot from verified live values before distributing a newly generated poster; site updates do not regenerate image files automatically.

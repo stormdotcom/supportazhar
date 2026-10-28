@@ -8,7 +8,7 @@ const output = join(project, 'build');
 mkdirSync(output, { recursive: true });
 
 const appeal = JSON.parse(readFileSync(join(project, 'data.json'), 'utf8'));
-const { accounts } = appeal;
+const accounts = appeal.accounts.filter((account) => account.number && account.ifsc);
 const rupees = (amount) => `₹${new Intl.NumberFormat('en-IN').format(amount)}`;
 const status = new Date(appeal.payments.upiStatusAt);
 const statusDate = status.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'Asia/Kolkata' });
@@ -71,5 +71,5 @@ const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1350" 
 writeFileSync(join(output, 'azhar-volunteer-poster.svg'), svg, 'utf8');
 await sharp(Buffer.from(svg)).png().toFile(join(output, 'azhar-volunteer-poster.png'));
 
-const message = `Please support ${appeal.person.name}. ${rupees(appeal.funding.collected)} has been collected toward the ${rupees(appeal.funding.target)} treatment goal. We still have a long way to go.\n\n${appeal.volunteer.whatsappText}\n\nNEFT recipient accounts (choose any ONE):\n${accounts.map((account, index) => `${index + 1}. ${account.holder} — ${account.number} — IFSC ${account.ifsc}`).join('\n')}\n\nUPI and GPay are currently ${appeal.payments.upiStatus} because their limits were reached on ${statusStamp}. Please check the recipient name before sending a bank transfer.\n\nQuestions about the appeal: ${appeal.contacts.reference[0].display}\n`;
+const message = `Please support ${appeal.person.name}. ${rupees(appeal.funding.collected)} has been collected toward the ${rupees(appeal.funding.target)} treatment goal. We still have a long way to go.\n\n${appeal.volunteer.whatsappText}\n\nPrimary UPI: SHAINA N S — shainans1@fbl. The older UPI accounts are inactive; recheck them after 24 hours.\n\nNEFT recipient accounts (choose any ONE):\n${accounts.map((account, index) => `${index + 1}. ${account.holder} — ${account.number} — IFSC ${account.ifsc}`).join('\n')}\n\nPlease check the recipient name before paying.\n\nQuestions about the appeal: ${appeal.contacts.reference[0].display}\n`;
 writeFileSync(join(output, 'azhar-volunteer-whatsapp.txt'), message, 'utf8');

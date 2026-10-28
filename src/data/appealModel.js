@@ -3,8 +3,8 @@ import snapshot from '../../data.json' with { type: 'json' };
 const fallbackStatus = Object.fromEntries(snapshot.accounts.map((account) => [account.id, {
   account_id: account.id,
   account_label: account.label,
-  active: snapshot.payments.upiStatus === 'active',
-  reason: snapshot.payments.upiStatusReason,
+  active: account.upiActive ?? snapshot.payments.upiStatus === 'active',
+  reason: account.upiStatusReason ?? (account.upiActive ? '' : snapshot.payments.upiStatusReason),
   changed_at: snapshot.payments.upiStatusAt,
 }]));
 

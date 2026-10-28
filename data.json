@@ -20,9 +20,9 @@
     "surgeryPaid": 500000
   },
   "payments": {
-    "upiStatus": "active",
-    "upiStatusReason": "All three UPI accounts are active",
-    "upiStatusAt": "2026-10-24T19:16:16+05:30",
+    "upiStatus": "partial",
+    "upiStatusReason": "Shaina N S is active; recheck the older UPI accounts after 24 hours",
+    "upiStatusAt": "2026-10-28T20:49:12+05:30",
     "bankTransferMethod": "NEFT"
   },
   "volunteer": {
@@ -32,19 +32,28 @@
     "steps": [
       "Collect cash contributions.",
       "Deposit the collected cash into your own bank account.",
-      "Transfer the combined amount from your account by NEFT to any one of the three accounts below."
+      "Transfer the combined amount by NEFT to one of the bank accounts below, or use Shaina N S’s UPI ID."
     ],
-    "whatsappText": "Volunteers can collect cash contributions, deposit the cash into their own bank account, then transfer the combined amount by NEFT from that account to any one of the accounts below.",
+    "whatsappText": "Volunteers can collect cash contributions, deposit the cash into their own bank account, then transfer the combined amount by NEFT to a listed bank account or by UPI to Shaina N S.",
     "posterLines": [
       "Collect cash contributions locally.",
       "Deposit the cash into your own bank account.",
-      "Transfer the total by NEFT to any account below."
+      "Transfer the total by NEFT to a listed bank account or by UPI to Shaina N S."
     ]
   },
   "accounts": [
     {
+      "id": "shaina",
+      "label": "Primary UPI account",
+      "holder": "SHAINA N S",
+      "upiId": "shainans1@fbl",
+      "upiActive": true
+    },
+    {
       "id": "current",
       "label": "HDFC account",
+      "upiActive": false,
+      "upiStatusReason": "UPI limit reached. Recheck after 24 hours; use the new primary UPI account for now.",
       "holder": "SHAFI S",
       "number": "50100912757807",
       "ifsc": "HDFC0004275",
@@ -54,6 +63,8 @@
     {
       "id": "secondary",
       "label": "Secondary account",
+      "upiActive": false,
+      "upiStatusReason": "UPI limit reached. Recheck after 24 hours; use the new primary UPI account for now.",
       "holder": "Muhammed Ashkar N",
       "number": "3439967725",
       "ifsc": "SBIN0007253",
@@ -62,7 +73,9 @@
     },
     {
       "id": "primary",
-      "label": "Primary account",
+      "label": "Naseela Nazar account",
+      "upiActive": false,
+      "upiStatusReason": "UPI limit reached. Recheck after 24 hours; use the new primary UPI account for now.",
       "holder": "Naseela Nazar",
       "number": "30990695716",
       "ifsc": "SBIN0010692",
@@ -88,6 +101,10 @@
     { "date": "2026-10-23", "dateTime": "2026-10-23T17:00:00+05:30", "time": "5:00 PM", "title": "Primary account reactivated", "detail": "The primary account became active again." },
     { "date": "2026-10-23", "dateTime": "2026-10-23T22:00:00+05:30", "time": "10:00 PM", "title": "Secondary account reactivated", "detail": "The secondary account became active again. All three accounts were active at that time." },
     { "date": "2026-10-24", "dateTime": "2026-10-24T12:00:00+05:30", "time": "12:00 PM", "title": "All UPI accounts reached their limits", "detail": "UPI and GPay were inactive across all three accounts at that time. Contributions could still be sent by NEFT." },
-    { "date": "2026-10-24", "dateTime": "2026-10-24T19:16:16+05:30", "time": "7:16 PM", "title": "All UPI accounts active again", "detail": "UPI and Google Pay are active across all three listed accounts. The exact reactivation time was not provided; this is when the status update was recorded." }
+    { "date": "2026-10-24", "dateTime": "2026-10-24T19:16:16+05:30", "time": "7:16 PM", "title": "All UPI accounts active again", "detail": "UPI and Google Pay are active across all three listed accounts. The exact reactivation time was not provided; this is when the status update was recorded." },
+    { "date": "2026-10-28", "dateTime": "2026-10-28T20:49:12+05:30", "time": "8:49 PM", "title": "HDFC account UPI deactivated", "detail": "HDFC account UPI was deactivated. UPI limit reached. Recheck after 24 hours; use the new primary UPI account for now." },
+    { "date": "2026-10-28", "dateTime": "2026-10-28T20:49:12+05:30", "time": "8:49 PM", "title": "Secondary account UPI deactivated", "detail": "Secondary account UPI was deactivated. UPI limit reached. Recheck after 24 hours; use the new primary UPI account for now." },
+    { "date": "2026-10-28", "dateTime": "2026-10-28T20:49:12+05:30", "time": "8:49 PM", "title": "Naseela Nazar account UPI deactivated", "detail": "Naseela Nazar account UPI was deactivated. UPI limit reached. Recheck after 24 hours; use the new primary UPI account for now." },
+    { "date": "2026-10-28", "dateTime": "2026-10-28T20:49:12+05:30", "time": "8:49 PM", "title": "New primary UPI account introduced", "detail": "SHAINA N S (shainans1@fbl) is now the primary UPI option. The three older UPI accounts reached their limits and are paused pending a status check after 24 hours. NEFT remains available for the older bank accounts." }
   ]
 }

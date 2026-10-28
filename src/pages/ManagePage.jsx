@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import AnnouncementGenerator from '../components/AnnouncementGenerator.jsx';
 import TransactionManager from '../components/TransactionManager.jsx';
 import { useAppeal } from '../data/liveAppeal.jsx';
+import { getAccounts } from '../data/accounts.js';
 import { supabase } from '../lib/supabase.js';
 import snapshot from '../../data.json' with { type: 'json' };
 
@@ -293,11 +294,12 @@ export default function ManagePage() {
     } finally { setBusy(false); }
   }
 
-  const orderedAccountIds = ['primary', 'secondary', 'current'];
+  const orderedAccountIds = ['shaina', 'primary', 'secondary', 'current'];
   const announcementAccounts = orderedAccountIds
     .map(id => (appeal?.accounts || snapshot.accounts || []).find(a => a.id === id))
     .filter(Boolean)
-    .map(a => ({ ...a, upiId: STATIC_UPI_IDS[a.id] || '', collected: accountCollected[a.id] ?? 0 }));
+    .map(a => ({ ...a, upiId: a.upiId || STATIC_UPI_IDS[a.id] || '', qrImage: getAccounts(appeal)[a.id]?.qrImage,
+      upiActive: appeal.accountStatus[a.id]?.active ?? false, collected: accountCollected[a.id] ?? 0 }));
 
   // ── Guards ─────────────────────────────────────────────────────────────────
   if (!supabase) return (

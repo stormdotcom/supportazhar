@@ -6,6 +6,7 @@ import FundingProgress from '../components/FundingProgress.jsx';
 import QrCode from '../components/QrCode.jsx';
 import { getAccounts } from '../data/accounts.js';
 import { rupees, shortStatusDate } from '../data/appeal.js';
+import { fallbackAppeal } from '../data/appealModel.js';
 import { useAppeal } from '../data/liveAppeal.jsx';
 
 function AccountCard({ account, status }) {
@@ -16,11 +17,8 @@ function AccountCard({ account, status }) {
         <h3>{account.holder}</h3>
       </div>
       <div className="other-account-body">
-        <div className="other-qr">
-          <div className="qr-frame"><QrCode account={account} /></div>
-          <p>Google Pay QR for {account.holder}</p>
-          <small>{status.active ? 'UPI is active. Check the recipient name before paying.' : `${status.reason || 'UPI is unavailable.'} Please use NEFT for now.`}</small>
-        </div>
+        {status.active && account.qrImage && <div className="other-qr"><div className="qr-frame"><QrCode account={account} /></div><p>UPI QR for {account.holder}</p></div>}
+        <p className="limit-note">{status.active ? 'UPI is active. Check the recipient name before paying.' : `${status.reason || 'UPI is currently unavailable.'} Bank transfers by NEFT remain available.`}</p>
         <AccountDetails account={account} showUpi={false} showPhone={false} />
       </div>
     </article>
@@ -30,11 +28,13 @@ function AccountCard({ account, status }) {
 export default function HomePage() {
   const { appeal } = useAppeal();
   const accounts = getAccounts(appeal);
+  const accountStatus = appeal.accountStatus.shaina ? appeal.accountStatus : fallbackAppeal.accountStatus;
   const { target, collected } = appeal.funding;
   const remaining = Math.max(0, target - collected);
-  const statusAt = shortStatusDate(appeal.payments.upiStatusAt);
-  const upiStatus = appeal.payments.upiStatus;
-  const currentStatus = appeal.accountStatus.current;
+  const statusAt = shortStatusDate(appeal.accountStatus.shaina ? appeal.payments.upiStatusAt : fallbackAppeal.payments.upiStatusAt);
+  const upiStatus = appeal.accountStatus.shaina ? appeal.payments.upiStatus : fallbackAppeal.payments.upiStatus;
+  const primaryAccount = accounts.shaina ?? getAccounts(fallbackAppeal).shaina;
+  const primaryStatus = accountStatus.shaina;
   const statusText = upiStatus === 'active' ? 'active on all accounts' : upiStatus === 'partial' ? 'active on some accounts' : 'inactive on all accounts';
 
   return (
@@ -47,10 +47,10 @@ export default function HomePage() {
           <p className="collection-update"><strong>{rupees(collected)} collected</strong> toward the {rupees(target)} target. We still have a long way to go.</p>
           {upiStatus !== 'active' && <div className="upi-context-card">
             <strong>{upiStatus === 'partial' ? 'Some UPI accounts are unavailable' : 'UPI is currently unavailable'}</strong>
-            <p>Check each account’s status before using its Google Pay QR code. Bank transfers by NEFT remain available. <Link to="/incident">Read the account updates <span aria-hidden="true">→</span></Link></p>
+            <p>Use Shaina N S’s UPI ID or QR code for contributions. The older UPI accounts reached their limits and should be checked again after 24 hours. Bank transfers by NEFT remain available. <Link to="/incident">Read the account updates <span aria-hidden="true">→</span></Link></p>
           </div>}
           <div className="hero-actions">
-            <Link className="primary-cta" to="/#contribute">Contribute by bank transfer <span aria-hidden="true">↓</span></Link>
+            <Link className="primary-cta" to="/#contribute">Contribute by UPI <span aria-hidden="true">↓</span></Link>
             <Link className="secondary-cta" to="/#volunteer">Start volunteering <span aria-hidden="true">↓</span></Link>
           </div>
         </div>
@@ -77,25 +77,25 @@ export default function HomePage() {
       <section className="contribution-section" id="contribute" aria-labelledby="contribute-title">
         <div className="section-intro">
           <div>
-            <h2 id="contribute-title">Contribute by NEFT</h2>
-            <p>UPI and GPay are currently {statusText}. Use the account number and IFSC below for a bank transfer.</p>
+            <h2 id="contribute-title">Contribute by UPI</h2>
+            <p>Shaina N S’s new UPI account is the primary payment option. The three older UPI accounts are inactive after reaching their limits; check their status again after 24 hours.</p>
           </div>
           <span className={upiStatus === 'active' ? 'active-pill' : 'inactive-pill'}>UPI {upiStatus === 'partial' ? 'partly active' : upiStatus} · {statusAt}</span>
         </div>
         <div className="current-account bank-account">
           <div className="bank-account-intro">
-            <span>01 / 03</span>
-            <h3>{accounts.current.holder}</h3>
-            <p>{accounts.current.branch}</p>
-            <div className="current-qr-block" id="google-pay-qr">
-              <div className="qr-frame qr-frame-current"><QrCode account={accounts.current} /></div>
-              <p>Google Pay QR for {accounts.current.holder}</p>
-              <small>{currentStatus.active ? 'UPI is active. Check the recipient name before paying.' : `${currentStatus.reason || 'UPI is unavailable.'} Please use NEFT for now.`}</small>
-            </div>
+            <span>Primary UPI account</span>
+            <h3>{primaryAccount.holder}</h3>
+            <p>New account for contributions</p>
+            {primaryStatus.active && <div className="current-qr-block" id="google-pay-qr">
+              <div className="qr-frame qr-frame-current"><QrCode account={primaryAccount} /></div>
+              <p>UPI QR for {primaryAccount.holder}</p>
+              <small>Check the recipient name and UPI ID before paying.</small>
+            </div>}
           </div>
           <div className="current-payment-block">
-            <p className="payment-instruction">Transfer by NEFT using these bank details. Check the recipient name before sending.</p>
-            <AccountDetails account={accounts.current} current showUpi={false} />
+            <p className="payment-instruction">{primaryStatus.active ? 'Pay using this UPI ID or scan the QR code.' : primaryStatus.reason || 'This UPI account is unavailable.'} Bank account number and IFSC have not been provided for this account.</p>
+            <AccountDetails account={primaryAccount} current showUpi={primaryStatus.active} />
           </div>
         </div>
       </section>
@@ -114,13 +114,14 @@ export default function HomePage() {
       <section className="more-accounts" aria-labelledby="more-accounts-title">
         <div className="section-intro narrow">
           <div>
-            <h2 id="more-accounts-title">Two more accounts for NEFT</h2>
-            <p>You can transfer to any one of the three accounts. UPI and GPay are currently {statusText}.</p>
+            <h2 id="more-accounts-title">Bank accounts for NEFT</h2>
+            <p>The three older UPI IDs are temporarily inactive. Their bank details remain available for NEFT transfers.</p>
           </div>
         </div>
         <div className="other-account-grid">
-          <AccountCard account={accounts.secondary} status={appeal.accountStatus.secondary} />
-          <AccountCard account={accounts.primary} status={appeal.accountStatus.primary} />
+          <AccountCard account={accounts.secondary} status={accountStatus.secondary} />
+          <AccountCard account={accounts.primary} status={accountStatus.primary} />
+          <AccountCard account={accounts.current} status={accountStatus.current} />
         </div>
       </section>
 

@@ -24,12 +24,12 @@ function CopyButton({ value, label }) {
 export default function AccountDetails({ account, current = false, showUpi = true, showPhone = true }) {
   return (
     <dl className={`account-details ${current ? 'account-details-current' : ''}`}>
-      {showUpi && <div><dt>UPI ID</dt><dd className="with-copy"><span>{account.upi}</span><CopyButton value={account.upi} label="UPI ID" /></dd></div>}
+      {showUpi && account.upiId && <div><dt>UPI ID</dt><dd className="with-copy"><span>{account.upiId}</span><CopyButton value={account.upiId} label="UPI ID" /></dd></div>}
       <div><dt>{account.holderLabel}</dt><dd>{account.holder}</dd></div>
-      <div><dt>{account.numberLabel}</dt><dd className="with-copy"><span>{account.number}</span><CopyButton value={account.number} label="account number" /></dd></div>
-      {current && <div><dt>Account Type</dt><dd>{account.accountType}</dd></div>}
-      <div><dt>{account.ifscLabel}</dt><dd className="with-copy"><span>{account.ifsc}</span><CopyButton value={account.ifsc} label="IFSC code" /></dd></div>
-      {current && <div><dt>Branch</dt><dd>{account.branch}</dd></div>}
+      {account.number && <div><dt>{account.numberLabel}</dt><dd className="with-copy"><span>{account.number}</span><CopyButton value={account.number} label="account number" /></dd></div>}
+      {current && account.accountType && <div><dt>Account Type</dt><dd>{account.accountType}</dd></div>}
+      {account.ifsc && <div><dt>{account.ifscLabel}</dt><dd className="with-copy"><span>{account.ifsc}</span><CopyButton value={account.ifsc} label="IFSC code" /></dd></div>}
+      {current && account.branch && <div><dt>Branch</dt><dd>{account.branch}</dd></div>}
       {showPhone && account.phone && <div><dt>{account.phoneLabel}</dt><dd><a href={`tel:${account.phoneHref}`}>{account.phone}</a></dd></div>}
     </dl>
   );

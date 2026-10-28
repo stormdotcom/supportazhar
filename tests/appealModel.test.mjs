@@ -10,10 +10,10 @@ const content = {
 };
 const metrics = { target_rupees: 2_000_000, collected_rupees: 2_000_001, surgery_paid_rupees: 500_000, updated_at: '2026-10-25T12:00:00Z' };
 
-test('derives all three UPI availability states', () => {
-  assert.equal(overallUpiStatus(Object.fromEntries(accountRows.map((row) => [row.account_id, row]))), 'active');
-  assert.equal(overallUpiStatus({ current: { active: true }, secondary: { active: false }, primary: { active: true } }), 'partial');
-  assert.equal(overallUpiStatus({ current: { active: false }, secondary: { active: false }, primary: { active: false } }), 'inactive');
+test('derives all three UPI availability states for four accounts', () => {
+  assert.equal(overallUpiStatus(Object.fromEntries(accountRows.map((row) => [row.account_id, row]))), 'partial');
+  assert.equal(overallUpiStatus({ shaina: { active: true }, current: { active: true }, secondary: { active: true }, primary: { active: true } }), 'active');
+  assert.equal(overallUpiStatus({ shaina: { active: false }, current: { active: false }, secondary: { active: false }, primary: { active: false } }), 'inactive');
 });
 
 test('merges live amounts, statuses, reported daily total, and an imprecise historical time', () => {
@@ -21,7 +21,8 @@ test('merges live amounts, statuses, reported daily total, and an imprecise hist
   const daily = [{ report_date: '2026-10-25', amount_rupees: 12_000, reported_at: '2026-10-25T09:00:00Z' }];
   const appeal = mergeLiveAppeal(content, metrics, accountRows, events, daily);
   assert.equal(appeal.funding.collected, 2_000_001);
-  assert.equal(appeal.payments.upiStatus, 'active');
+  assert.equal(appeal.payments.upiStatus, 'partial');
+  assert.equal(appeal.accountStatus.shaina.active, true);
   assert.equal(appeal.timeline[0].dateTime, '2026-10-22');
   assert.equal(appeal.timeline[0].time, 'After 6:00 PM');
   assert.deepEqual(appeal.dailyCollections, daily);

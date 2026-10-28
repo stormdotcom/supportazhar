@@ -1,5 +1,5 @@
 import React from 'react';
-import { additionalAccountsImage, appealImage } from '../data/accounts.js';
+import { Link } from 'react-router';
 import { useAppeal } from '../data/liveAppeal.jsx';
 
 export default function SiteFooter() {
@@ -7,7 +7,7 @@ export default function SiteFooter() {
   return (
     <footer className="site-footer">
       <span>Support for {appeal.person.name}</span>
-      <div><a href={appealImage} target="_blank" rel="noreferrer">View medical appeal image</a><a href={additionalAccountsImage} target="_blank" rel="noreferrer">View additional accounts image</a></div>
+      <div><Link to="/incident">View latest account updates</Link></div>
     </footer>
   );
 }
